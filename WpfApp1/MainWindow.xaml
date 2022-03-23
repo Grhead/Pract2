@@ -41,7 +41,7 @@
             FontSize="14"
             FontFamily="Cousine"
             FontWeight="Bold"
-            Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Login}"
             />
         <TextBlock
             x:Name="GreetPasswordtext"
@@ -64,14 +64,14 @@
             FontSize="14"
             FontFamily="Cousine"
             FontWeight="Bold"
-            Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding Password}"
             />
         <Button 
             x:Name="ApplyButton"
             Grid.Column="0"
             Grid.Row="4"
             Grid.ColumnSpan="2"
-            Content ="q"
+            Content ="{Binding Accept, UpdateSourceTrigger=PropertyChanged}"
             BorderBrush="#EE4C7C"
             Margin="300 10 200 10"
             Background="#C2B9B0"

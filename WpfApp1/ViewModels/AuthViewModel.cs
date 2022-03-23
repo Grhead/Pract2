@@ -9,39 +9,17 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.ViewModels
 {
-    class AuthViewModel : ViewModels.StaticViewModel
+    class AuthViewModel : StaticViewModel
     {
         private RelayCommand getLoginCommand;
-
-        private ObservableCollection<Client> clients;
         private string IfAccept = "NOPE";
-        public RelayCommand GetLoginCommand
-        {
-            get 
-            {
-                return getLoginCommand ??
-                    (getLoginCommand = new RelayCommand(x =>
-                    {
-                        Client client = new Client();
-                        if (client.Login == login && client.Password == password)
-                        {
-                            IfAccept = "YEAH";
-                        }
-                    }));
-            }
-        }
-
-        public AuthViewModel()
-        {
-
-        }
         private string login;
         private string password;
         public string Login
-        { 
-            get 
-            { 
-                return login; 
+        {
+            get
+            {
+                return login;
             }
             set
             {
@@ -54,12 +32,47 @@ namespace WpfApp1.ViewModels
             {
                 return password;
             }
-            set 
-            { 
-                password = value; 
+            set
+            {
+                password = value;
             }
         }
-
-        
+        public string Accept
+        {
+            get 
+            {
+                return IfAccept;  
+            }
+            set
+            {
+                IfAccept = value;
+                OnPropertyChanged();
+            }
+        }
+        public AuthViewModel()
+        {
+        }
+        public RelayCommand GetLoginCommand
+        {
+            get 
+            {
+                return getLoginCommand ??
+                    (getLoginCommand = new RelayCommand(x =>
+                    {
+                        Client client = Service.db.Clients.FirstOrDefault(q=>q.Login == login && q.Password == password);
+                        if (client.Role == 2)
+                        {
+                            Accept = "YEAH";
+                            new CookWindow().Show();
+                            new MainWindow().Close();
+                        } else if (client.Role == 1)
+                        {
+                            Accept = "YEAH";
+                            new StuwardWindow().Show();
+                            new MainWindow().Close();
+                        }
+                    }));
+            }
+        }
     }
 }

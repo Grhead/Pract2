@@ -26,14 +26,15 @@
             Grid.Column ="0"
             Grid.RowSpan="6"
             Margin="15 10 15 20"
-            ItemsSource="{Binding DishInOrder}">
+            ItemsSource="{Binding DishInOrder}"
+            SelectedItem="{Binding SelectedOrder}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -45,23 +46,32 @@
                             x:Name="IdOfOreder"
                             Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding Order.Id, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding StringFormat=Номер заказа: {0}, Path = Order.Id}"
+                            Margin="0 0 4 0">
                         </TextBlock>
                         <TextBlock
                             x:Name="TimeOfOreder"
                             Grid.Column="1"
                             Grid.Row="0"
-                            Text="{Binding Order.Time, UpdateSourceTrigger=PropertyChanged}">
+                            Text= "{Binding StringFormat=Время: {0}, Path = Order.Time}"
+                            Margin="0 0 4 0">
                         </TextBlock>
                         <TextBlock
                             x:Name="DishInOreder"
                             Grid.Column="2"
                             Grid.Row="0"
-                            Text="{Binding Dish.Title, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding StringFormat=Блюдо: {0}, Path= Dish.Title}">
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <TextBlock
+           Name="NumberIfOrder"
+           Grid.Column="1"
+           Grid.Row="0"
+           Background="LightGray"
+           Text="{}"
+            />
     </Grid>
 </Window>

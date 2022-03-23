@@ -19,15 +19,20 @@ namespace WpfApp1.ViewModels
         }
 
         private ObservableCollection<DishesInOrder> dishesInOrder;
+        
 
         public ObservableCollection<DishesInOrder> DishInOrder
         {
-            get => dishesInOrder;
+            get
+            {
+                return dishesInOrder;
+            }
             set
             {
                 dishesInOrder = value;
                 OnPropertyChanged();
             }
         }
+        
     }
 }
