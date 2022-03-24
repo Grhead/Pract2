@@ -60,15 +60,19 @@ namespace WpfApp1.ViewModels
                     (getLoginCommand = new RelayCommand(x =>
                     {
                         Client client = Service.db.Clients.FirstOrDefault(q=>q.Login == login && q.Password == password);
-                        if (client.Role == 2)
+                        if (client == null)
                         {
-                            Accept = "YEAH";
-                            new CookWindow().Show();
-                            new MainWindow().Close();
+                            Accept = "NOPE";
                         } else if (client.Role == 1)
                         {
                             Accept = "YEAH";
                             new StuwardWindow().Show();
+                            new MainWindow().Close();
+                        }
+                        else if (client.Role == 2)
+                        {
+                            Accept = "YEAH";
+                            new CookWindow().Show();
                             new MainWindow().Close();
                         }
                     }));

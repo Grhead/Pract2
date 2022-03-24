@@ -61,7 +61,7 @@ namespace WpfApp1
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
-                entity.Property(e => e.Time).HasColumnType("datetime");
+                entity.Property(e => e.Time).HasMaxLength(50);
 
                 entity.Property(e => e.Title).HasMaxLength(50);
             });
