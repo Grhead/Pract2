@@ -66,14 +66,16 @@ namespace WpfApp1.ViewModels
                         } else if (client.Role == 1)
                         {
                             Accept = "YEAH";
-                            new StuwardWindow().Show();
                             new MainWindow().Close();
+                            new StuwardWindow().Show();
+
                         }
                         else if (client.Role == 2)
                         {
                             Accept = "YEAH";
-                            new CookWindow().Show();
                             new MainWindow().Close();
+                            new CookWindow().Show();
+                            
                         }
                     }));
             }

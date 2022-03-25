@@ -19,22 +19,21 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-
         <ListBox
             x:Name="ListOfOrders"
             Grid.Row="0"
             Grid.Column ="0"
-            Grid.RowSpan="6"
+            Grid.RowSpan="3"
             Margin="15 10 15 20"
-            ItemsSource="{Binding CheckOrder}"
+            ItemsSource="{Binding CheckOrder, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedOrder}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
@@ -46,14 +45,55 @@
                             x:Name="IdOfOreder"
                             Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id}"
+                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id, UpdateSourceTrigger=PropertyChanged}"
                             Margin="0 0 4 0">
                         </TextBlock>
                         <TextBlock
                             x:Name="DishInOreder"
                             Grid.Column="2"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Статус: {0}, Path = StatusNavigation.Title}"
+                            Text="{Binding StringFormat=Статус: {0}, Path = StatusNavigation.Title, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="12"
+                            FontFamily="Cousine">
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox
+            x:Name="ListOfCompleteOrders"
+            Grid.Row="3"
+            Grid.Column ="0"
+            Grid.RowSpan="3"
+            Margin="15 10 15 20"
+            ItemsSource="{Binding CheckCompleteOrder, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedOrder}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border
+                            BorderBrush="#EE4C7C">
+                        </Border>
+                        <TextBlock
+                            x:Name="IdOfOreder"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0 0 4 0">
+                        </TextBlock>
+                        <TextBlock
+                            x:Name="DishInOreder"
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Text="{Binding StringFormat=Статус: {0}, Path = StatusNavigation.Title, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12"
                             FontFamily="Cousine">
                         </TextBlock>
@@ -107,7 +147,7 @@
                             Margin="0 0 4 0"
                             FontSize="14"
                             FontFamily="Cousine"
-                            />         
+                            />
                         <TextBlock
                             Name="TimeOfDish"
                             Grid.Column="1"
@@ -131,6 +171,20 @@
             Content="Принять"
             FontSize="14"
             FontFamily="Cousine"
-            Command="{Binding ChangeStatus}"/>
+            Command="{Binding ChangeStatus}"
+            />
+        <Button
+            Name="FinishButton"
+            Grid.Column="1"
+            Grid.Row="5"
+            HorizontalAlignment="Right"
+            Width="170"
+            Height="50"
+            VerticalAlignment="Center"
+            Content="Выполнен"
+            FontSize="14"
+            FontFamily="Cousine"
+            Command="{Binding FinishButton}"
+            />
     </Grid>
 </Window>

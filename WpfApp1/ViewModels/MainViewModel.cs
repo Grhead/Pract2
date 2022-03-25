@@ -16,11 +16,14 @@ namespace WpfApp1.ViewModels
         public MainViewModel()
         {
             //dishesInOrder = new ObservableCollection<DishesInOrder>(new CooskRDBContext().DishesInOrders.Include(q => q.Order).Include(x => x.Dish));
-            order = new ObservableCollection<Order>(Service.db.Orders.Include(q=>q.StatusNavigation).Where(x => x.StatusNavigation.Id < 3));
+            //order = new ObservableCollection<Order>(Service.db.Orders.Include(q=>q.StatusNavigation).Where(x => x.StatusNavigation.Id < 3));
+            CheckOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
+            CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
+
         }
-        
+
         //private ObservableCollection<DishesInOrder> dishesInOrder;
-        private ObservableCollection<Order> order;
+
 
         //public ObservableCollection<DishesInOrder> DishInOrder
         //{
@@ -34,6 +37,8 @@ namespace WpfApp1.ViewModels
         //        OnPropertyChanged();
         //    }
         //}
+        private ObservableCollection<Order> order = new ObservableCollection<Order>();
+
         public ObservableCollection<Order> CheckOrder
         {
             get
@@ -43,6 +48,23 @@ namespace WpfApp1.ViewModels
             set
             {
                 order = value;
+                OnPropertyChanged();
+                //OnPropertyChanged(nameof(CheckOrder));
+            }
+        }
+        private ObservableCollection<Order> Completeorder = new ObservableCollection<Order>();
+
+        public ObservableCollection<Order> CheckCompleteOrder
+        {
+            get
+            {
+                return Completeorder;
+            }
+            set
+            {
+                Completeorder = value;
+                OnPropertyChanged();
+                //OnPropertyChanged(nameof(CheckCompleteOrder));
             }
         }
         private Order selectedItem = new Order();
@@ -54,16 +76,18 @@ namespace WpfApp1.ViewModels
             }
             set
             {
-                
                 selectedItem = value;
-                DishesInOrders = new ObservableCollection<DishesInOrder>(Service.db.DishesInOrders.Where(x => x.OrderId == selectedItem.id).Include(x => x.Dish));
-                int temp = 0;
-                foreach (var item in dishesInOrders)
+                if (selectedItem != null)
                 {
-                    temp += item.Dish.Time;
+                    DishesInOrders = new ObservableCollection<DishesInOrder>(Service.db.DishesInOrders.Where(x => x.OrderId == selectedItem.id).Include(x => x.Dish));
+                    int temp = 0;
+                    foreach (var item in dishesInOrders)
+                    {
+                        temp += item.Dish.Time;
+                    }
+                    GenaralTime = temp;
+                    OrderDetailes = dishesInOrders.First(q => q.OrderId == selectedItem.Id);
                 }
-                GenaralTime = temp;
-                OrderDetailes = dishesInOrders.First(q=>q.OrderId == selectedItem.Id);
                 OnPropertyChanged();
             }
         }
@@ -115,11 +139,51 @@ namespace WpfApp1.ViewModels
                 return changeStatus ??
                     (changeStatus = new RelayCommand(x =>
                     {
-                        var status = Service.db.Orders.Where(x=>x.id == SelectedOrder.id).FirstOrDefault();
-                        status.Status = 3;
-                        Service.db.SaveChanges();
+                        Order status = new Order();
+                        if (SelectedOrder != null)
+                        {
+                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedOrder.Id);
+                            
+                            if (status != null)
+                            {
+                                status.Status = 3;
+                                
+                                Service.db.SaveChanges();
+                                OnPropertyChanged();
+                            }
+                        }
+                        CheckOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
+                        CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
+                        OnPropertyChanged();
                     }));
             }
         }
+        private RelayCommand finishButton;
+        
+        public RelayCommand FinishButton
+        {
+            get
+            {
+                return finishButton ??
+                    (finishButton = new RelayCommand(x =>
+                    {
+                        Order status = new Order();
+                        if (SelectedOrder != null)
+                        {
+                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedOrder.Id && x.Status == 3);
+                            if (status != null)
+                            {
+                                status.Status = 4;
+                                    
+                                Service.db.SaveChanges();
+                                OnPropertyChanged();
+                            }
+                        }
+                        CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
+                        OnPropertyChanged();
+                    }));
+            }
+        }
+
     }
 }
