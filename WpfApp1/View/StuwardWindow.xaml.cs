@@ -22,6 +22,7 @@ namespace WpfApp1
         public StuwardWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModels.StuwardViewModel();
         }
     }
 }

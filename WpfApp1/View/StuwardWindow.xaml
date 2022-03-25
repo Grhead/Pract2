@@ -3,11 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1" xmlns:viewmodels="clr-namespace:WpfApp1.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AuthViewModel}"
+        xmlns:local="clr-namespace:WpfApp1" xmlns:viewmodels="clr-namespace:WpfApp1.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:StuwardViewModel}"
         mc:Ignorable="d"
         Title="StuwardWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#C2CAD0">
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -16,5 +17,130 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <ListBox
+            x:Name="ListOfDishes"
+            Grid.Row="0"
+            Grid.Column ="0"
+            Grid.RowSpan="2"
+            Margin="10 10 0 10"
+            ItemsSource="{Binding CheckDish, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedDish}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border
+                            BorderBrush="#EE4C7C">
+                        </Border>
+                        <TextBlock
+                            x:Name="IdOfOreder"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Text="{Binding StringFormat=Название: {0}, Path =Title, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0 0 4 0">
+                        </TextBlock>
+                        <TextBlock
+                            x:Name="DishInOreder"
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Text="{Binding StringFormat=Цена: {0}, Path =Price, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="12"
+                            FontFamily="Cousine">
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListBox
+            x:Name="PreOrder"
+            Grid.Row="0"
+            Grid.Column ="2"
+            Grid.RowSpan="2"
+            Margin="0 10 10 10"
+            ItemsSource="{Binding FinishDish, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedDish}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Border
+                            BorderBrush="#EE4C7C">
+                        </Border>
+                        <TextBlock
+                            x:Name="IdOfOreder"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Text="{Binding StringFormat=Название: {0}, Path =Title, UpdateSourceTrigger=PropertyChanged}"
+                            Margin="0 0 4 0">
+                        </TextBlock>
+                        <TextBlock
+                            x:Name="DishInOreder"
+                            Grid.Column="2"
+                            Grid.Row="0"
+                            Text="{Binding StringFormat=Цена: {0}, Path =Price, UpdateSourceTrigger=PropertyChanged}"
+                            FontSize="12"
+                            FontFamily="Cousine">
+                        </TextBlock>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button
+            Name ="AddButton"
+            Grid.Column="1"
+            Grid.Row ="1"
+            Margin ="70 10 70 90"
+            Content=">>"
+            FontFamily="Cousine"
+            FontSize="20"
+            FontWeight="DemiBold"
+            Command="{Binding AddButtonCommand}"
+            />
+        <Button
+            Name ="DeleteButton"
+            Grid.Column="1"
+            Grid.Row ="1"
+            Margin ="70 90 70 10"
+            Content="&lt;&lt;"
+            FontFamily="Cousine"
+            FontSize="20"
+            FontWeight="DemiBold"
+            Command="{Binding DeleteButtonCommand}"
+            />
+        <TextBlock
+            Name="TotalPrice"
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="20 30 20 30"
+            Background="#c2cada"
+            FontSize="64"
+            Text="122"
+            FontWeight="DemiBold"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            FontFamily="Cousine"
+            />
+        <Button
+            Name ="SetOrPay"
+            Grid.Column="2"
+            Grid.Row="2"
+            Margin="20 30"
+            Content="{Binding GetOrPay, UpdateSourceTrigger=PropertyChanged}"
+            Command="{Binding GetorpayCommand}"
+            />
     </Grid>
 </Window>
