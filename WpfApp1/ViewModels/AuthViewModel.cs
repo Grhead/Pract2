@@ -68,6 +68,7 @@ namespace WpfApp1.ViewModels
                             Accept = "YEAH";
                             new MainWindow().Close();
                             new StuwardWindow().Show();
+                            Service.ClientSession = client;
 
                         }
                         else if (client.Role == 2)

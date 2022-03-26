@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WpfApp1
 {
@@ -23,6 +24,18 @@ namespace WpfApp1
         {
             InitializeComponent();
             DataContext = new ViewModels.StuwardViewModel();
+            var timer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
+            timer.Tick += TimerTick;
+            timer.Start();
+
+            
+        }
+        void TimerTick(object sender, EventArgs e)
+        {
+            TimeBlock.Text = DateTime.Now.ToLongTimeString();
         }
     }
 }

@@ -86,7 +86,7 @@ namespace WpfApp1.ViewModels
                         temp += item.Dish.Time;
                     }
                     GenaralTime = temp;
-                    OrderDetailes = dishesInOrders.First(q => q.OrderId == selectedItem.Id);
+                    OrderDetailes = dishesInOrders.FirstOrDefault(q => q.OrderId == selectedItem.Id);
                 }
                 OnPropertyChanged();
             }
