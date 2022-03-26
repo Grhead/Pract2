@@ -34,6 +34,7 @@ namespace WpfApp1
 
         public int IdClient { get; set; }
         public int Status { get; set; }
+        public int Sum { get; set; }
 
         public virtual Client IdClientNavigation { get; set; } = null!;
         public virtual Status StatusNavigation { get; set; } = null!;

@@ -96,6 +96,8 @@ namespace WpfApp1
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Time).HasColumnType("datetime");
+                
+                entity.Property(e => e.Sum).HasColumnType("money");
 
                 entity.HasOne(d => d.IdClientNavigation)
                     .WithMany(p => p.Orders)

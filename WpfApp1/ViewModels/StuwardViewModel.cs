@@ -203,6 +203,7 @@ namespace WpfApp1.ViewModels
                             {
                                 status.Status = 2;
                                 Service.db.SaveChanges();
+                                status.Sum = Convert.ToInt32(SumOfDishes);
                                 OnPropertyChanged();
                             }
                         }
