@@ -22,4 +22,8 @@
     <PackageReference Include="Report.NET" Version="0.9.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>
