@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp1.View;
 
 namespace WpfApp1.ViewModels
 {
@@ -77,6 +78,11 @@ namespace WpfApp1.ViewModels
                             new MainWindow().Close();
                             new CookWindow().Show();
                             
+                        } else if (client.Role == 3)
+                        {
+                            Accept = "YEAH";
+                            new MainWindow().Close();
+                            new AdminWindow().Show();
                         }
                     }));
             }

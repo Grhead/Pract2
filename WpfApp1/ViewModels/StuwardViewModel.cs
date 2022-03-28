@@ -98,6 +98,8 @@ namespace WpfApp1.ViewModels
                             order.Time = DateTime.Now;
                             order.IdClient = Service.ClientSession.Id;
                             order.Status = 1;
+                            order.Sum = Convert.ToInt32(SumOfDishes);
+
                             Service.db.Orders.Add(order);
                             Service.db.SaveChanges();
                             foreach (var item in FinishDish)
@@ -195,7 +197,7 @@ namespace WpfApp1.ViewModels
                     (payCommand = new RelayCommand(x =>
                     {
                         Order status = new Order();
-                        if (SelectedDish != null)
+                        if (SelectedOrder != null)
                         {
                             status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedOrder.Id);
 
@@ -203,7 +205,6 @@ namespace WpfApp1.ViewModels
                             {
                                 status.Status = 2;
                                 Service.db.SaveChanges();
-                                status.Sum = Convert.ToInt32(SumOfDishes);
                                 OnPropertyChanged();
                             }
                         }

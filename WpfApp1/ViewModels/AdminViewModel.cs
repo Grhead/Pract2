@@ -13,7 +13,7 @@ namespace WpfApp1.ViewModels
 {
     public class AdminViewModel : StaticViewModel
     {
-        private ObservableCollection<Order> getRep = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4));
+        private ObservableCollection<Order> getRep = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
 
         private RelayCommand generatePDF;
         public RelayCommand GeneratePDF
@@ -29,6 +29,7 @@ namespace WpfApp1.ViewModels
                         FontProp fp = new FontPropMM(fd, 4);
                         Double rX = 20;
                         Double rY = 20;
+                        int AllSum = 0;
                         foreach (var item in getRep)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.Time)));
@@ -38,9 +39,21 @@ namespace WpfApp1.ViewModels
                         rX = rX + 60;
                         foreach (var item in getRep)
                         {
-                            page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.StatusNavigation.Title)));
+                            page.AddMM(rX, rY, new RepString(fp, Convert.ToString($"{item.Sum} $")));
+                            AllSum += item.Sum;
                             rY += 10;
                         }
+                        rY = 20;
+                        rX = rX + 60;
+                        foreach (var item in getRep)
+                        {
+                            page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.IdClientNavigation.Login)));
+                            rY += 10;
+                        }
+                        rX = 20;
+                        rY = rY + 10;
+                        page.AddMM(rX, rY, new RepString(fp, Convert.ToString($"{AllSum} $")));
+
                         RT.ViewPDF(report, "Report.pdf");
                     }));
             }

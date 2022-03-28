@@ -185,7 +185,7 @@
                             x:Name="DishInOreder"
                             Grid.Column="2"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Статус: {0}, Path =Status, UpdateSourceTrigger=PropertyChanged}"
+                            Text="{Binding StringFormat=Сумма: {0}, Path=Sum, UpdateSourceTrigger=PropertyChanged}"
                             FontSize="12"
                             FontFamily="Cousine">
                         </TextBlock>
