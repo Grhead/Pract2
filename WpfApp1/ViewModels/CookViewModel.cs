@@ -11,7 +11,6 @@ namespace WpfApp1.ViewModels
         {
             GetOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
             FinishOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
-
         }
         private ObservableCollection<Order> _getOrder = new ObservableCollection<Order>();
 
@@ -33,7 +32,6 @@ namespace WpfApp1.ViewModels
             {
                 _finishOrder = value;
                 OnPropertyChanged();
-                //OnPropertyChanged(nameof(FinishOrder));
             }
         }
         private Order _selectedItem = new Order();

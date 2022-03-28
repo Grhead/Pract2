@@ -99,7 +99,6 @@ namespace WpfApp1.ViewModels
         public RelayCommand AddButtonCommand => _addButtonCommand ??
                     (_addButtonCommand = new RelayCommand(x =>
                     {
-                        //FinishDishes = new ObservableCollection<Dish>(Service.db.Dishes.Where(x => x.Title == SelectedDish.Title));
                         if (SelectedDish != null)
                         {
                             FinishDishes.Add(Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
