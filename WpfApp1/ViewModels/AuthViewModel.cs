@@ -42,7 +42,7 @@ namespace WpfApp1.ViewModels
                         else if (client.Role == 1)
                         {
                             AcceptButtonContent = "YEAH";
-                            new MainWindow().Close();
+                            new AuthWindow().Close();
                             new StuwardWindow().Show();
                             Service.ClientSession = client;
 
@@ -50,14 +50,14 @@ namespace WpfApp1.ViewModels
                         else if (client.Role == 2)
                         {
                             AcceptButtonContent = "YEAH";
-                            new MainWindow().Close();
+                            new AuthWindow().Close();
                             new CookWindow().Show();
 
                         }
                         else if (client.Role == 3)
                         {
                             AcceptButtonContent = "YEAH";
-                            new MainWindow().Close();
+                            new AuthWindow().Close();
                             new AdminWindow().Show();
                         }
                     }));

@@ -4,9 +4,6 @@ using System.Windows.Threading;
 
 namespace WpfApp1
 {
-    /// <summary>
-    /// Логика взаимодействия для StuwardWindow.xaml
-    /// </summary>
     public partial class StuwardWindow : Window
     {
         public StuwardWindow()
