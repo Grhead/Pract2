@@ -9,7 +9,10 @@
     <Grid>
         <Button
             x:Name="GenerateButton"
+            Content="Сгенерировать PDF"
+            FontFamily="Cousine"
+            FontSize="14"
             Command="{Binding GeneratePDF}"
-            Content="Сгенерировать PDF"/>
+            />
     </Grid>
 </Window>

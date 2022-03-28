@@ -42,18 +42,18 @@
                         </Border>
                         <TextBlock
                             x:Name="IdOfOreder"
-                            Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id, UpdateSourceTrigger=PropertyChanged}"
-                            Margin="0 0 4 0">
+                            Grid.Column="0"
+                            Margin="0 0 4 0"
+                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id, UpdateSourceTrigger=PropertyChanged}">
                         </TextBlock>
                         <TextBlock
                             x:Name="DishInOreder"
-                            Grid.Column="2"
                             Grid.Row="0"
+                            Grid.Column="2"
                             Text="{Binding StringFormat=Статус: {0}, Path = StatusNavigation.Title, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="12"
-                            FontFamily="Cousine">
+                            FontFamily="Cousine"
+                            FontSize="12">
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
@@ -82,18 +82,18 @@
                         </Border>
                         <TextBlock
                             x:Name="IdOfOreder"
-                            Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id, UpdateSourceTrigger=PropertyChanged}"
-                            Margin="0 0 4 0">
+                            Grid.Column="0"
+                            Margin="0 0 4 0"
+                            Text="{Binding StringFormat=Номер заказа: {0}, Path =Id, UpdateSourceTrigger=PropertyChanged}">
                         </TextBlock>
                         <TextBlock
                             x:Name="DishInOreder"
-                            Grid.Column="2"
                             Grid.Row="0"
+                            Grid.Column="2"
                             Text="{Binding StringFormat=Статус: {0}, Path = StatusNavigation.Title, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="12"
-                            FontFamily="Cousine">
+                            FontFamily="Cousine"
+                            FontSize="12">
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
@@ -101,28 +101,28 @@
         </ListBox>
         <TextBlock
            Name="TimeOfOrder"
-           Grid.Column="1"
            Grid.Row="0"
-           Text="{Binding OrderDetailes.Order.Time}"
+           Grid.Column="1"
            Margin="15 10 5 10" 
-           FontSize="12"
-           FontFamily="Cousine"
            Background="#c2cada"
+           Text="{Binding OrderDetailes.Order.Time}"
+           FontFamily="Cousine"
+           FontSize="12"
             />
         <TextBlock
            Name="GeneralTime"
-           Grid.Column="1"
            Grid.Row="1"
-           Text="{Binding StringFormat =Общее время приготовления {0},Path = TotalTime}"
-           Margin="15 0 0 0"
-           FontSize="14"
-           FontFamily="Cousine"
+           Grid.Column="1"
            VerticalAlignment="Center"
+           Margin="15 0 0 0"
            Background="#c2cada"
+           Text="{Binding StringFormat =Общее время приготовления {0},Path = TotalTime}"
+           FontFamily="Cousine"
+           FontSize="14"
             />
         <ListBox
-            Grid.Column ="1"
             Grid.Row="3"
+            Grid.Column ="1"
             Grid.RowSpan="2"
             Margin="15 10 15 20"
             Background="#c2cada"
@@ -139,20 +139,20 @@
                         </Grid.RowDefinitions>
                         <TextBlock
                             Name="TitleOfDish"
-                            Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Наименование {0},Path = Dish.Title}"
+                            Grid.Column="0"
                             Margin="0 0 4 0"
-                            FontSize="14"
+                            Text="{Binding StringFormat=Наименование {0},Path = Dish.Title}"
                             FontFamily="Cousine"
+                            FontSize="14"
                             />
                         <TextBlock
                             Name="TimeOfDish"
-                            Grid.Column="1"
                             Grid.Row="0"
+                            Grid.Column="1"
                             Text="{Binding StringFormat=Время {0} минут ,Path = Dish.Time}"
-                            FontSize="14"
                             FontFamily="Cousine"
+                            FontSize="14"
                             />
                     </Grid>
                 </DataTemplate>
@@ -160,28 +160,28 @@
         </ListBox>
         <Button
             Name="GetButton"
-            Grid.Column="1"
             Grid.Row="5"
-            Width="170"
-            Height="50"
+            Grid.Column="1"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
+            Width="170"
+            Height="50"
             Content="Принять"
-            FontSize="14"
             FontFamily="Cousine"
+            FontSize="14"
             Command="{Binding StartCook}"
             />
         <Button
             Name="FinishButton"
-            Grid.Column="1"
             Grid.Row="5"
+            Grid.Column="1"
             HorizontalAlignment="Right"
+            VerticalAlignment="Center"
             Width="170"
             Height="50"
-            VerticalAlignment="Center"
             Content="Выполнен"
-            FontSize="14"
             FontFamily="Cousine"
+            FontSize="14"
             Command="{Binding OrderReady}"
             />
     </Grid>

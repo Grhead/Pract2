@@ -22,7 +22,7 @@
             Grid.Row="0"
             Grid.Column ="0"
             Grid.RowSpan="2"
-            Margin="10 10 0 10"
+            Margin="10 30 0 10"
             ItemsSource="{Binding CheckDish, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedDish}">
             <ListBox.ItemTemplate>
@@ -41,18 +41,18 @@
                         </Border>
                         <TextBlock
                             x:Name="IdOfOreder"
-                            Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Название: {0}, Path =Title, UpdateSourceTrigger=PropertyChanged}"
-                            Margin="0 0 4 0">
+                            Grid.Column="0"
+                            Margin="0 0 4 0"
+                            Text="{Binding StringFormat=Название: {0}, Path =Title, UpdateSourceTrigger=PropertyChanged}">
                         </TextBlock>
                         <TextBlock
                             x:Name="DishInOreder"
-                            Grid.Column="2"
                             Grid.Row="0"
+                            Grid.Column="2"
                             Text="{Binding StringFormat=Цена: {0}, Path =Price, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="12"
-                            FontFamily="Cousine">
+                            FontFamily="Cousine"
+                            FontSize="12">
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
@@ -63,7 +63,7 @@
             Grid.Row="0"
             Grid.Column ="2"
             Grid.RowSpan="2"
-            Margin="0 10 10 10"
+            Margin="0 30 10 10"
             ItemsSource="{Binding FinishDishes, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedDish}">
             <ListBox.ItemTemplate>
@@ -101,8 +101,8 @@
         </ListBox>
         <Button
             Name ="AddButton"
-            Grid.Column="1"
             Grid.Row ="1"
+            Grid.Column="1"
             Margin ="70 10 70 90"
             Content=">>"
             FontFamily="Cousine"
@@ -112,8 +112,8 @@
             />
         <Button
             Name ="DeleteButton"
-            Grid.Column="1"
             Grid.Row ="1"
+            Grid.Column="1"
             Margin ="70 90 70 10"
             Content="&lt;&lt;"
             FontFamily="Cousine"
@@ -127,30 +127,31 @@
             Grid.Column="2"
             Margin="30 0 30 110"
             Background="#c2cada"
-            FontSize="21"
             Text="{Binding StringFormat= $ {0},Path =SumOfDishes}"
-            FontWeight="DemiBold"
             FontFamily="Cousine"
+            FontSize="21"
+            FontWeight="DemiBold"
             />
         <Button
             Name ="SetOrPay"
-            Grid.Column="2"
             Grid.Row="2"
+            Grid.Column="2"
             Margin="30 50 30 30"
-            Content="{Binding CreateOrderButtonContent, UpdateSourceTrigger=PropertyChanged}"
-            Command="{Binding CreateOrder}"
-            FontSize="16"
+            Content="Создать заказ"
             FontFamily="Cousine"
+            FontSize="16"
+            FontWeight="DemiBold"
+            Command="{Binding CreateOrder}"
             />
         <TextBlock
             x:Name="TimeBlock"
-            Grid.Column="1"
             Grid.Row="0"
-            Margin="0 10 0 0"
-            FontSize="16"
-            FontFamily="Cousine"
-            FontWeight="DemiBold"
+            Grid.Column="1"
             HorizontalAlignment="Center"
+            Margin="0 10 0 0"
+            FontFamily="Cousine"
+            FontSize="16"
+            FontWeight="DemiBold"
             />
         <ListBox
             x:Name="NeedPay"
@@ -176,18 +177,18 @@
                         </Border>
                         <TextBlock
                             x:Name="IdOfOreder"
-                            Grid.Column="0"
                             Grid.Row="0"
-                            Text="{Binding StringFormat=Время: {0}, Path =Time, UpdateSourceTrigger=PropertyChanged}"
-                            Margin="0 0 4 0">
+                            Grid.Column="0"
+                            Margin="0 0 4 0"
+                            Text="{Binding StringFormat=Время: {0}, Path =Time, UpdateSourceTrigger=PropertyChanged}">
                         </TextBlock>
                         <TextBlock
                             x:Name="DishInOreder"
-                            Grid.Column="2"
                             Grid.Row="0"
+                            Grid.Column="2"
                             Text="{Binding StringFormat=Сумма: {0}, Path=Sum, UpdateSourceTrigger=PropertyChanged}"
-                            FontSize="12"
-                            FontFamily="Cousine">
+                            FontFamily="Cousine"
+                            FontSize="12">
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
@@ -195,13 +196,43 @@
         </ListBox>
         <Button
             Name ="PayButton"
-            Grid.Column="1"
             Grid.Row="2"
+            Grid.Column="1"
             Margin="45 50 45 30"
-            Content="Оплачен"
-            Command="{Binding PayCommand}"
-            FontSize="16"
+            Content="Заказ оплачен"
             FontFamily="Cousine"
+            FontSize="16"
+            FontWeight="DemiBold"
+            Command="{Binding PayCommand}"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="110 5 0 110"
+            Height="17"
+            Text="Меню"
+            FontFamily="Cousine"
+            FontSize="16"
+            FontWeight="DemiBold"
+            />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="110 5 0 110"
+            Height="17"
+            Text="Заказ"
+            FontFamily="Cousine"
+            FontSize="16"
+            FontWeight="DemiBold"
+            />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="85 -145 0 0"
+            Height="18"
+            Text="Ждут оплаты"
+            FontFamily="Cousine"
+            FontSize="16"
             FontWeight="DemiBold"
             />
     </Grid>

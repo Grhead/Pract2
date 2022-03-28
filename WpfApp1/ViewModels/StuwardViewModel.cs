@@ -55,16 +55,6 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged();
             }
         }
-        private string _createOrderButtonContent = "Создать заказ";
-        public string CreateOrderButtonContent
-        {
-            get => _createOrderButtonContent;
-            set
-            {
-                _createOrderButtonContent = value;
-                OnPropertyChanged();
-            }
-        }
         private RelayCommand _createOrder;
         public RelayCommand CreateOrder => _createOrder ??
                     (_createOrder = new RelayCommand(x =>
@@ -99,14 +89,17 @@ namespace WpfApp1.ViewModels
         public RelayCommand AddButtonCommand => _addButtonCommand ??
                     (_addButtonCommand = new RelayCommand(x =>
                     {
-                        if (SelectedDish != null)
+                        if (SelectedDish.Title != null)
                         {
                             FinishDishes.Add(Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
                         }
                         double temp = 0;
-                        foreach (Dish? item in FinishDishes)
+                        foreach (Dish item in FinishDishes)
                         {
-                            temp += Convert.ToDouble(item.Price);
+                            if (item != null)
+                            {
+                                temp += Convert.ToDouble(item.Price);
+                            }
                         }
                         SumOfDishes = temp;
                         OnPropertyChanged();
@@ -115,14 +108,17 @@ namespace WpfApp1.ViewModels
         public RelayCommand DeleteButtonCommand => _deleteButtonCommand ??
                     (_deleteButtonCommand = new RelayCommand(x =>
                     {
-                        if (SelectedDish != null)
+                        if (SelectedDish != null && FinishDishes.Count != 0)
                         {
                             FinishDishes.Remove(FinishDishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
                         }
                         double temp = 0;
-                        foreach (Dish? item in FinishDishes)
+                        foreach (Dish item in FinishDishes)
                         {
-                            temp += Convert.ToDouble(item.Price);
+                            if (item != null)
+                            {
+                                temp += Convert.ToDouble(item.Price);
+                            }
                         }
                         SumOfDishes = temp;
                         OnPropertyChanged();
