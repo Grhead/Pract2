@@ -8,7 +8,7 @@
         Title="AdminWindow" Height="450" Width="800">
     <Grid>
         <Button
-            x:Name="Generate"
+            x:Name="GenerateButton"
             Command="{Binding GeneratePDF}"
             Content="Сгенерировать PDF"/>
     </Grid>

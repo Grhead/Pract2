@@ -22,7 +22,7 @@ namespace WpfApp1
         public CookWindow()
         {
             InitializeComponent();
-            DataContext = new ViewModels.MainViewModel();
+            DataContext = new ViewModels.CookViewModel();
         }
     }
 }

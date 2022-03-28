@@ -13,7 +13,7 @@ namespace WpfApp1.ViewModels
 {
     public class AdminViewModel : StaticViewModel
     {
-        private ObservableCollection<Order> _getRep = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
+        private ObservableCollection<Order> _infoFromDb = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
 
         private RelayCommand _generatePdf;
         public RelayCommand GeneratePDF
@@ -30,14 +30,14 @@ namespace WpfApp1.ViewModels
                         Double rX = 20;
                         Double rY = 20;
                         int AllSum = 0;
-                        foreach (var item in _getRep)
+                        foreach (var item in _infoFromDb)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.Time)));
                             rY += 10;
                         }
                         rY = 20;
                         rX = rX + 60;
-                        foreach (var item in _getRep)
+                        foreach (var item in _infoFromDb)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString($"{item.Sum} $")));
                             AllSum += item.Sum;
@@ -45,7 +45,7 @@ namespace WpfApp1.ViewModels
                         }
                         rY = 20;
                         rX = rX + 60;
-                        foreach (var item in _getRep)
+                        foreach (var item in _infoFromDb)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.IdClientNavigation.Login)));
                             rY += 10;

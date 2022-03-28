@@ -25,8 +25,8 @@
             Grid.Column ="0"
             Grid.RowSpan="3"
             Margin="15 10 15 20"
-            ItemsSource="{Binding CheckOrder, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedOrder}">
+            ItemsSource="{Binding GetOrder, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -65,8 +65,8 @@
             Grid.Column ="0"
             Grid.RowSpan="3"
             Margin="15 10 15 20"
-            ItemsSource="{Binding CheckCompleteOrder, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedOrder}">
+            ItemsSource="{Binding FinishOrder, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -113,7 +113,7 @@
            Name="GeneralTime"
            Grid.Column="1"
            Grid.Row="1"
-           Text="{Binding StringFormat =Общее время приготовления {0},Path = GenaralTime}"
+           Text="{Binding StringFormat =Общее время приготовления {0},Path = TotalTime}"
            Margin="15 0 0 0"
            FontSize="14"
            FontFamily="Cousine"
@@ -169,7 +169,7 @@
             Content="Принять"
             FontSize="14"
             FontFamily="Cousine"
-            Command="{Binding ChangeStatus}"
+            Command="{Binding StartCook}"
             />
         <Button
             Name="FinishButton"
@@ -182,7 +182,7 @@
             Content="Выполнен"
             FontSize="14"
             FontFamily="Cousine"
-            Command="{Binding FinishButton}"
+            Command="{Binding OrderReady}"
             />
     </Grid>
 </Window>

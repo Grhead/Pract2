@@ -10,65 +10,46 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WpfApp1.ViewModels
 {
-    public class MainViewModel : StaticViewModel
+    public class CookViewModel : StaticViewModel
     {
 
-        public MainViewModel()
+        public CookViewModel()
         {
-            //dishesInOrder = new ObservableCollection<DishesInOrder>(new CooskRDBContext().DishesInOrders.Include(q => q.Order).Include(x => x.Dish));
-            //_order = new ObservableCollection<Order>(Service.db.Orders.Include(q=>q.StatusNavigation).Where(x => x.StatusNavigation.Id < 3));
-            CheckOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
-            CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
+            GetOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
+            FinishOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
 
         }
+        private ObservableCollection<Order> _getOrder = new ObservableCollection<Order>();
 
-        //private ObservableCollection<DishesInOrder> dishesInOrder;
-
-
-        //public ObservableCollection<DishesInOrder> DishInOrder
-        //{
-        //    get
-        //    {
-        //        return dishesInOrder;
-        //    }
-        //    set
-        //    {
-        //        dishesInOrder = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        private ObservableCollection<Order> _order = new ObservableCollection<Order>();
-
-        public ObservableCollection<Order> CheckOrder
+        public ObservableCollection<Order> GetOrder
         {
             get
             {
-                return _order;
+                return _getOrder;
             }
             set
             {
-                _order = value;
+                _getOrder = value;
                 OnPropertyChanged();
-                //OnPropertyChanged(nameof(CheckOrder));
             }
         }
-        private ObservableCollection<Order> _completeOrder = new ObservableCollection<Order>();
+        private ObservableCollection<Order> _finishOrder = new ObservableCollection<Order>();
 
-        public ObservableCollection<Order> CheckCompleteOrder
+        public ObservableCollection<Order> FinishOrder
         {
             get
             {
-                return _completeOrder;
+                return _finishOrder;
             }
             set
             {
-                _completeOrder = value;
+                _finishOrder = value;
                 OnPropertyChanged();
-                //OnPropertyChanged(nameof(CheckCompleteOrder));
+                //OnPropertyChanged(nameof(FinishOrder));
             }
         }
         private Order _selectedItem = new Order();
-        public Order SelectedOrder
+        public Order SelectedItem
         {
             get
             {
@@ -85,7 +66,7 @@ namespace WpfApp1.ViewModels
                     {
                         temp += item.Dish.Time;
                     }
-                    GenaralTime = temp;
+                    TotalTime = temp;
                     OrderDetailes = _dishesInOrders.FirstOrDefault(q => q.OrderId == _selectedItem.Id);
                 }
                 OnPropertyChanged();
@@ -118,31 +99,31 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged();
             }
         }
-        private int _genaralTime = 0;
-        public int GenaralTime
+        private int _totalTime = 0;
+        public int TotalTime
         {
             get
             {
-                return _genaralTime;
+                return _totalTime;
             }
             set
             {
-                _genaralTime = value;
+                _totalTime = value;
                 OnPropertyChanged();
             }
         }
-        private RelayCommand _changeStatus;
-        public RelayCommand ChangeStatus
+        private RelayCommand _startCook;
+        public RelayCommand StartCook
         {
             get
             {
-                return _changeStatus ??
-                    (_changeStatus = new RelayCommand(x =>
+                return _startCook ??
+                    (_startCook = new RelayCommand(x =>
                     {
                         Order status = new Order();
-                        if (SelectedOrder != null)
+                        if (SelectedItem != null)
                         {
-                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedOrder.Id);
+                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedItem.Id);
                             
                             if (status != null)
                             {
@@ -152,25 +133,25 @@ namespace WpfApp1.ViewModels
                                 OnPropertyChanged();
                             }
                         }
-                        CheckOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
-                        CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
+                        GetOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
+                        FinishOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
                         OnPropertyChanged();
                     }));
             }
         }
-        private RelayCommand _finishButton;
+        private RelayCommand _orderReady;
         
-        public RelayCommand FinishButton
+        public RelayCommand OrderReady
         {
             get
             {
-                return _finishButton ??
-                    (_finishButton = new RelayCommand(x =>
+                return _orderReady ??
+                    (_orderReady = new RelayCommand(x =>
                     {
                         Order status = new Order();
-                        if (SelectedOrder != null)
+                        if (SelectedItem != null)
                         {
-                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedOrder.Id && x.Status == 3);
+                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedItem.Id && x.Status == 3);
                             if (status != null)
                             {
                                 status.Status = 4;
@@ -179,7 +160,7 @@ namespace WpfApp1.ViewModels
                                 OnPropertyChanged();
                             }
                         }
-                        CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
+                        FinishOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
                         OnPropertyChanged();
                     }));
             }

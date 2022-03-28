@@ -71,7 +71,7 @@
             Grid.Column="0"
             Grid.Row="4"
             Grid.ColumnSpan="2"
-            Content ="{Binding Accept, UpdateSourceTrigger=PropertyChanged}"
+            Content ="{Binding AcceptButtonContent, UpdateSourceTrigger=PropertyChanged}"
             BorderBrush="#EE4C7C"
             Margin="300 10 200 10"
             Background="#C2B9B0"

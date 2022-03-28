@@ -14,8 +14,8 @@ namespace WpfApp1.ViewModels
         public StuwardViewModel()
         {
             CheckDish = new ObservableCollection<Dish>(Service.db.Dishes);
-            FinishDish = new ObservableCollection<Dish>(Service.db.Dishes.Where(x => x.Title == SelectedDish.Title));
-            Needtopay = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
+            FinishDishes = new ObservableCollection<Dish>(Service.db.Dishes.Where(x => x.Title == SelectedDish.Title));
+            NeedPaymentList = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
 
         }
         private ObservableCollection<Dish> _checkDish = new ObservableCollection<Dish>();
@@ -31,16 +31,16 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Dish> _finishDish = new ObservableCollection<Dish>();
-        public ObservableCollection<Dish> FinishDish
+        private ObservableCollection<Dish> _finishDishes = new ObservableCollection<Dish>();
+        public ObservableCollection<Dish> FinishDishes
         {
             get
             {
-                return _finishDish;
+                return _finishDishes;
             }
             set
             {
-                _finishDish = value;
+                _finishDishes = value;
                 OnPropertyChanged();
             }
         }
@@ -58,41 +58,41 @@ namespace WpfApp1.ViewModels
             }
         }
 
-        private Order _selectedOrder = new Order();
-        public Order SelectedOrder
+        private Order _selectedItem = new Order();
+        public Order SelectedItem
         {
             get
             {
-                return _selectedOrder;
+                return _selectedItem;
             }
             set
             {
-                _selectedOrder = value;
+                _selectedItem = value;
                 OnPropertyChanged();
             }
         }
-        private string _getOrPay = "Создать заказ";
-        public string GetOrPay
+        private string _createOrderButtonContent = "Создать заказ";
+        public string CreateOrderButtonContent
         {
             get 
             { 
-                return _getOrPay; 
+                return _createOrderButtonContent; 
             }
             set
             {
-                _getOrPay = value;
+                _createOrderButtonContent = value;
                 OnPropertyChanged();
             }
         }
-        private RelayCommand _getorpayCommand;
-        public RelayCommand GetorpayCommand
+        private RelayCommand _createOrder;
+        public RelayCommand CreateOrder
         {
             get
             {
-                return _getorpayCommand ??
-                    (_getorpayCommand = new RelayCommand(x =>
+                return _createOrder ??
+                    (_createOrder = new RelayCommand(x =>
                     {
-                        if (FinishDish.Count != 0)
+                        if (FinishDishes.Count != 0)
                         {
                             Order order = new Order();
                             order.Time = DateTime.Now;
@@ -102,7 +102,7 @@ namespace WpfApp1.ViewModels
 
                             Service.db.Orders.Add(order);
                             Service.db.SaveChanges();
-                            foreach (var item in FinishDish)
+                            foreach (var item in FinishDishes)
                             {
                                 DishesInOrder dishesInOrder = new DishesInOrder();
                                 dishesInOrder.DishId = item.Id;
@@ -111,7 +111,7 @@ namespace WpfApp1.ViewModels
                                 Service.db.SaveChanges();
                             }
                         }
-                        Needtopay = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
+                        NeedPaymentList = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
                         OnPropertyChanged();
                     }));
 
@@ -125,13 +125,13 @@ namespace WpfApp1.ViewModels
                 return _addButtonCommand ??
                     (_addButtonCommand = new RelayCommand(x =>
                     {
-                        //FinishDish = new ObservableCollection<Dish>(Service.db.Dishes.Where(x => x.Title == SelectedDish.Title));
+                        //FinishDishes = new ObservableCollection<Dish>(Service.db.Dishes.Where(x => x.Title == SelectedDish.Title));
                         if (SelectedDish != null)
                         {
-                            FinishDish.Add(Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
+                            FinishDishes.Add(Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
                         }
                         double temp = 0;
-                        foreach (var item in FinishDish)
+                        foreach (var item in FinishDishes)
                         {
                             temp += Convert.ToDouble(item.Price);
                         }
@@ -150,10 +150,10 @@ namespace WpfApp1.ViewModels
                     {
                         if (SelectedDish != null)
                         {
-                            FinishDish.Remove(FinishDish.FirstOrDefault(x => x.Title == SelectedDish.Title));
+                            FinishDishes.Remove(FinishDishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
                         }
                         double temp = 0;
-                        foreach (var item in FinishDish)
+                        foreach (var item in FinishDishes)
                         {
                             temp += Convert.ToDouble(item.Price);
                         }
@@ -175,16 +175,16 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Order> _needToPay = new ObservableCollection<Order>();
-        public ObservableCollection<Order> Needtopay
+        private ObservableCollection<Order> _needPaymentList = new ObservableCollection<Order>();
+        public ObservableCollection<Order> NeedPaymentList
         {
             get
             {
-                return _needToPay;
+                return _needPaymentList;
             }
             set
             {
-                _needToPay = value;
+                _needPaymentList = value;
                 OnPropertyChanged();
             }
         }
@@ -197,9 +197,9 @@ namespace WpfApp1.ViewModels
                     (_payCommand = new RelayCommand(x =>
                     {
                         Order status = new Order();
-                        if (SelectedOrder != null)
+                        if (SelectedItem != null)
                         {
-                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedOrder.Id);
+                            status = Service.db.Orders.FirstOrDefault(x => x.Id == SelectedItem.Id);
 
                             if (status != null)
                             {
@@ -208,7 +208,7 @@ namespace WpfApp1.ViewModels
                                 OnPropertyChanged();
                             }
                         }
-                        Needtopay = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
+                        NeedPaymentList = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
                         OnPropertyChanged();
                     }));
             }

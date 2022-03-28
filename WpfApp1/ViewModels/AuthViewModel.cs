@@ -13,7 +13,7 @@ namespace WpfApp1.ViewModels
     class AuthViewModel : StaticViewModel
     {
         private RelayCommand _getLoginCommand;
-        private string _ifAccept = "NOPE";
+        private string _ifAcceptButtonContent = "NOPE";
         private string _login;
         private string _password;
         public string Login
@@ -38,15 +38,15 @@ namespace WpfApp1.ViewModels
                 _password = value;
             }
         }
-        public string Accept
+        public string AcceptButtonContent
         {
             get 
             {
-                return _ifAccept;  
+                return _ifAcceptButtonContent;  
             }
             set
             {
-                _ifAccept = value;
+                _ifAcceptButtonContent = value;
                 OnPropertyChanged();
             }
         }
@@ -63,10 +63,10 @@ namespace WpfApp1.ViewModels
                         Client client = Service.db.Clients.FirstOrDefault(q=>q.Login == _login && q.Password == _password);
                         if (client == null)
                         {
-                            Accept = "NOPE";
+                            AcceptButtonContent = "NOPE";
                         } else if (client.Role == 1)
                         {
-                            Accept = "YEAH";
+                            AcceptButtonContent = "YEAH";
                             new MainWindow().Close();
                             new StuwardWindow().Show();
                             Service.ClientSession = client;
@@ -74,13 +74,13 @@ namespace WpfApp1.ViewModels
                         }
                         else if (client.Role == 2)
                         {
-                            Accept = "YEAH";
+                            AcceptButtonContent = "YEAH";
                             new MainWindow().Close();
                             new CookWindow().Show();
                             
                         } else if (client.Role == 3)
                         {
-                            Accept = "YEAH";
+                            AcceptButtonContent = "YEAH";
                             new MainWindow().Close();
                             new AdminWindow().Show();
                         }
