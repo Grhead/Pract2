@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using WpfApp1.View;
 
 namespace WpfApp1.ViewModels
 {
-    class AuthViewModel : StaticViewModel
+    internal class AuthViewModel : StaticViewModel
     {
         private RelayCommand _getLoginCommand;
         private string _ifAcceptButtonContent = "NOPE";
@@ -18,32 +11,17 @@ namespace WpfApp1.ViewModels
         private string _password;
         public string Login
         {
-            get
-            {
-                return _login;
-            }
-            set
-            {
-                _login = value;
-            }
+            get => _login;
+            set => _login = value;
         }
         public string Password
         {
-            get
-            {
-                return _password;
-            }
-            set
-            {
-                _password = value;
-            }
+            get => _password;
+            set => _password = value;
         }
         public string AcceptButtonContent
         {
-            get 
-            {
-                return _ifAcceptButtonContent;  
-            }
+            get => _ifAcceptButtonContent;
             set
             {
                 _ifAcceptButtonContent = value;
@@ -53,18 +31,15 @@ namespace WpfApp1.ViewModels
         public AuthViewModel()
         {
         }
-        public RelayCommand GetLoginCommand
-        {
-            get 
-            {
-                return _getLoginCommand ??
+        public RelayCommand GetLoginCommand => _getLoginCommand ??
                     (_getLoginCommand = new RelayCommand(x =>
                     {
-                        Client client = Service.db.Clients.FirstOrDefault(q=>q.Login == _login && q.Password == _password);
+                        Client client = Service.db.Clients.FirstOrDefault(q => q.Login == _login && q.Password == _password);
                         if (client == null)
                         {
                             AcceptButtonContent = "NOPE";
-                        } else if (client.Role == 1)
+                        }
+                        else if (client.Role == 1)
                         {
                             AcceptButtonContent = "YEAH";
                             new MainWindow().Close();
@@ -77,15 +52,14 @@ namespace WpfApp1.ViewModels
                             AcceptButtonContent = "YEAH";
                             new MainWindow().Close();
                             new CookWindow().Show();
-                            
-                        } else if (client.Role == 3)
+
+                        }
+                        else if (client.Role == 3)
                         {
                             AcceptButtonContent = "YEAH";
                             new MainWindow().Close();
                             new AdminWindow().Show();
                         }
                     }));
-            }
-        }
     }
 }

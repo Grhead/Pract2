@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WpfApp1
+﻿namespace WpfApp1
 {
     public class Service
     {
@@ -12,17 +6,11 @@ namespace WpfApp1
         private static Client clientSession = new Client();
         public static Client ClientSession
         {
-            get 
-            { 
-                return clientSession; 
-            }
-            set 
-            { 
-                clientSession = value; 
-            }
+            get => clientSession;
+            set => clientSession = value;
         }
 
     }
-    
+
 
 }

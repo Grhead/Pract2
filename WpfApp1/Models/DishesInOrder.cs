@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using WpfApp1.ViewModels;
-namespace WpfApp1
+﻿namespace WpfApp1
 {
     public partial class DishesInOrder : ViewModels.StaticViewModel
     {
