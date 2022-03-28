@@ -36,8 +36,8 @@ namespace WpfApp1
         public int Status { get; set; }
         public int Sum { get; set; }
 
-        public virtual Client IdClientNavigation { get; set; } = null!;
-        public virtual Status StatusNavigation { get; set; } = null!;
-        public virtual ICollection<DishesInOrder> DishesInOrders { get; set; }
+        public Client IdClientNavigation { get; set; } = null!;
+        public Status StatusNavigation { get; set; } = null!;
+        public ICollection<DishesInOrder> DishesInOrders { get; set; }
     }
 }

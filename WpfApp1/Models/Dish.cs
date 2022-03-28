@@ -14,6 +14,6 @@ namespace WpfApp1
         public decimal Price { get; set; }
         public int Time { get; set; }
 
-        public virtual ICollection<DishesInOrder> DishesInOrders { get; set; }
+        public ICollection<DishesInOrder> DishesInOrders { get; set; }
     }
 }
