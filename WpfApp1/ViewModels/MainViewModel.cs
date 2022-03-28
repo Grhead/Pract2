@@ -16,7 +16,7 @@ namespace WpfApp1.ViewModels
         public MainViewModel()
         {
             //dishesInOrder = new ObservableCollection<DishesInOrder>(new CooskRDBContext().DishesInOrders.Include(q => q.Order).Include(x => x.Dish));
-            //order = new ObservableCollection<Order>(Service.db.Orders.Include(q=>q.StatusNavigation).Where(x => x.StatusNavigation.Id < 3));
+            //_order = new ObservableCollection<Order>(Service.db.Orders.Include(q=>q.StatusNavigation).Where(x => x.StatusNavigation.Id < 3));
             CheckOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 2));
             CheckCompleteOrder = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 3));
 
@@ -37,107 +37,107 @@ namespace WpfApp1.ViewModels
         //        OnPropertyChanged();
         //    }
         //}
-        private ObservableCollection<Order> order = new ObservableCollection<Order>();
+        private ObservableCollection<Order> _order = new ObservableCollection<Order>();
 
         public ObservableCollection<Order> CheckOrder
         {
             get
             {
-                return order;
+                return _order;
             }
             set
             {
-                order = value;
+                _order = value;
                 OnPropertyChanged();
                 //OnPropertyChanged(nameof(CheckOrder));
             }
         }
-        private ObservableCollection<Order> Completeorder = new ObservableCollection<Order>();
+        private ObservableCollection<Order> _completeOrder = new ObservableCollection<Order>();
 
         public ObservableCollection<Order> CheckCompleteOrder
         {
             get
             {
-                return Completeorder;
+                return _completeOrder;
             }
             set
             {
-                Completeorder = value;
+                _completeOrder = value;
                 OnPropertyChanged();
                 //OnPropertyChanged(nameof(CheckCompleteOrder));
             }
         }
-        private Order selectedItem = new Order();
+        private Order _selectedItem = new Order();
         public Order SelectedOrder
         {
             get
             {
-                return selectedItem;
+                return _selectedItem;
             }
             set
             {
-                selectedItem = value;
-                if (selectedItem != null)
+                _selectedItem = value;
+                if (_selectedItem != null)
                 {
-                    DishesInOrders = new ObservableCollection<DishesInOrder>(Service.db.DishesInOrders.Where(x => x.OrderId == selectedItem.id).Include(x => x.Dish));
+                    DishesInOrders = new ObservableCollection<DishesInOrder>(Service.db.DishesInOrders.Where(x => x.OrderId == _selectedItem.id).Include(x => x.Dish));
                     int temp = 0;
-                    foreach (var item in dishesInOrders)
+                    foreach (var item in _dishesInOrders)
                     {
                         temp += item.Dish.Time;
                     }
                     GenaralTime = temp;
-                    OrderDetailes = dishesInOrders.FirstOrDefault(q => q.OrderId == selectedItem.Id);
+                    OrderDetailes = _dishesInOrders.FirstOrDefault(q => q.OrderId == _selectedItem.Id);
                 }
                 OnPropertyChanged();
             }
         }
 
-        private ObservableCollection<DishesInOrder> dishesInOrders = new ObservableCollection<DishesInOrder>(Service.db.DishesInOrders);
+        private ObservableCollection<DishesInOrder> _dishesInOrders = new ObservableCollection<DishesInOrder>(Service.db.DishesInOrders);
         public ObservableCollection<DishesInOrder> DishesInOrders
         {
             get
             {
-                return dishesInOrders;
+                return _dishesInOrders;
             }
             set
             {
-                dishesInOrders = value;
+                _dishesInOrders = value;
                 OnPropertyChanged();
             }
         }
-        private DishesInOrder orderDetailes;
+        private DishesInOrder _orderDetailes;
         public DishesInOrder OrderDetailes
         {
             get
             {
-                return orderDetailes;
+                return _orderDetailes;
             }
             set
             {
-                orderDetailes = value;
+                _orderDetailes = value;
                 OnPropertyChanged();
             }
         }
-        private int genaralTime = 0;
+        private int _genaralTime = 0;
         public int GenaralTime
         {
             get
             {
-                return genaralTime;
+                return _genaralTime;
             }
             set
             {
-                genaralTime = value;
+                _genaralTime = value;
                 OnPropertyChanged();
             }
         }
-        private RelayCommand changeStatus;
+        private RelayCommand _changeStatus;
         public RelayCommand ChangeStatus
         {
             get
             {
-                return changeStatus ??
-                    (changeStatus = new RelayCommand(x =>
+                return _changeStatus ??
+                    (_changeStatus = new RelayCommand(x =>
                     {
                         Order status = new Order();
                         if (SelectedOrder != null)
@@ -158,14 +158,14 @@ namespace WpfApp1.ViewModels
                     }));
             }
         }
-        private RelayCommand finishButton;
+        private RelayCommand _finishButton;
         
         public RelayCommand FinishButton
         {
             get
             {
-                return finishButton ??
-                    (finishButton = new RelayCommand(x =>
+                return _finishButton ??
+                    (_finishButton = new RelayCommand(x =>
                     {
                         Order status = new Order();
                         if (SelectedOrder != null)

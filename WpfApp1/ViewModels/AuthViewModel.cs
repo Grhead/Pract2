@@ -12,41 +12,41 @@ namespace WpfApp1.ViewModels
 {
     class AuthViewModel : StaticViewModel
     {
-        private RelayCommand getLoginCommand;
-        private string IfAccept = "NOPE";
-        private string login;
-        private string password;
+        private RelayCommand _getLoginCommand;
+        private string _ifAccept = "NOPE";
+        private string _login;
+        private string _password;
         public string Login
         {
             get
             {
-                return login;
+                return _login;
             }
             set
             {
-                login = value;
+                _login = value;
             }
         }
         public string Password
         {
             get
             {
-                return password;
+                return _password;
             }
             set
             {
-                password = value;
+                _password = value;
             }
         }
         public string Accept
         {
             get 
             {
-                return IfAccept;  
+                return _ifAccept;  
             }
             set
             {
-                IfAccept = value;
+                _ifAccept = value;
                 OnPropertyChanged();
             }
         }
@@ -57,10 +57,10 @@ namespace WpfApp1.ViewModels
         {
             get 
             {
-                return getLoginCommand ??
-                    (getLoginCommand = new RelayCommand(x =>
+                return _getLoginCommand ??
+                    (_getLoginCommand = new RelayCommand(x =>
                     {
-                        Client client = Service.db.Clients.FirstOrDefault(q=>q.Login == login && q.Password == password);
+                        Client client = Service.db.Clients.FirstOrDefault(q=>q.Login == _login && q.Password == _password);
                         if (client == null)
                         {
                             Accept = "NOPE";

@@ -18,79 +18,79 @@ namespace WpfApp1.ViewModels
             Needtopay = new ObservableCollection<Order>(Service.db.Orders.Include(x => x.StatusNavigation).Where(x => x.Status == 1));
 
         }
-        private ObservableCollection<Dish> checkDish = new ObservableCollection<Dish>();
+        private ObservableCollection<Dish> _checkDish = new ObservableCollection<Dish>();
         public ObservableCollection<Dish> CheckDish
         {
             get
             {
-                return checkDish;
+                return _checkDish;
             }
             set
             {
-                checkDish = value;
+                _checkDish = value;
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Dish> finishDish = new ObservableCollection<Dish>();
+        private ObservableCollection<Dish> _finishDish = new ObservableCollection<Dish>();
         public ObservableCollection<Dish> FinishDish
         {
             get
             {
-                return finishDish;
+                return _finishDish;
             }
             set
             {
-                finishDish = value;
+                _finishDish = value;
                 OnPropertyChanged();
             }
         }
-        private Dish selectedDish = new Dish();
+        private Dish _selectedDish = new Dish();
         public Dish SelectedDish
         {
             get
             {
-                return selectedDish;
+                return _selectedDish;
             }
             set
             {
-                selectedDish = value;
+                _selectedDish = value;
                 OnPropertyChanged();
             }
         }
 
-        private Order selectedOrder = new Order();
+        private Order _selectedOrder = new Order();
         public Order SelectedOrder
         {
             get
             {
-                return selectedOrder;
+                return _selectedOrder;
             }
             set
             {
-                selectedOrder = value;
+                _selectedOrder = value;
                 OnPropertyChanged();
             }
         }
-        private string getorpay = "Создать заказ";
+        private string _getOrPay = "Создать заказ";
         public string GetOrPay
         {
             get 
             { 
-                return getorpay; 
+                return _getOrPay; 
             }
             set
             {
-                getorpay = value;
+                _getOrPay = value;
                 OnPropertyChanged();
             }
         }
-        private RelayCommand getorpayCommand;
+        private RelayCommand _getorpayCommand;
         public RelayCommand GetorpayCommand
         {
             get
             {
-                return getorpayCommand ??
-                    (getorpayCommand = new RelayCommand(x =>
+                return _getorpayCommand ??
+                    (_getorpayCommand = new RelayCommand(x =>
                     {
                         if (FinishDish.Count != 0)
                         {
@@ -117,13 +117,13 @@ namespace WpfApp1.ViewModels
 
             }
         }
-        private RelayCommand addButtonCommand;
+        private RelayCommand _addButtonCommand;
         public RelayCommand AddButtonCommand
         {
             get
             {
-                return addButtonCommand ??
-                    (addButtonCommand = new RelayCommand(x =>
+                return _addButtonCommand ??
+                    (_addButtonCommand = new RelayCommand(x =>
                     {
                         //FinishDish = new ObservableCollection<Dish>(Service.db.Dishes.Where(x => x.Title == SelectedDish.Title));
                         if (SelectedDish != null)
@@ -140,13 +140,13 @@ namespace WpfApp1.ViewModels
                     }));
             }
         }
-        private RelayCommand deleteButtonCommand;
+        private RelayCommand _deleteButtonCommand;
         public RelayCommand DeleteButtonCommand
         {
             get
             {
-                return deleteButtonCommand ??
-                    (deleteButtonCommand = new RelayCommand(x =>
+                return _deleteButtonCommand ??
+                    (_deleteButtonCommand = new RelayCommand(x =>
                     {
                         if (SelectedDish != null)
                         {
@@ -162,39 +162,39 @@ namespace WpfApp1.ViewModels
                     }));
             }
         }
-        private double sumOfDishes;
+        private double _sumOfDishes;
         public double SumOfDishes
         {
             get
             {
-                return sumOfDishes;
+                return _sumOfDishes;
             }
             set
             {
-                sumOfDishes = value;
+                _sumOfDishes = value;
                 OnPropertyChanged();
             }
         }
-        private ObservableCollection<Order> needtopay = new ObservableCollection<Order>();
+        private ObservableCollection<Order> _needToPay = new ObservableCollection<Order>();
         public ObservableCollection<Order> Needtopay
         {
             get
             {
-                return needtopay;
+                return _needToPay;
             }
             set
             {
-                needtopay = value;
+                _needToPay = value;
                 OnPropertyChanged();
             }
         }
-        private RelayCommand payCommand;
+        private RelayCommand _payCommand;
         public RelayCommand PayCommand
         {
             get
             {
-                return payCommand ??
-                    (payCommand = new RelayCommand(x =>
+                return _payCommand ??
+                    (_payCommand = new RelayCommand(x =>
                     {
                         Order status = new Order();
                         if (SelectedOrder != null)

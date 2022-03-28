@@ -13,15 +13,15 @@ namespace WpfApp1.ViewModels
 {
     public class AdminViewModel : StaticViewModel
     {
-        private ObservableCollection<Order> getRep = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
+        private ObservableCollection<Order> _getRep = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
 
-        private RelayCommand generatePDF;
+        private RelayCommand _generatePdf;
         public RelayCommand GeneratePDF
         {
             get
             {
-                return generatePDF ??
-                    (generatePDF = new RelayCommand(x =>
+                return _generatePdf ??
+                    (_generatePdf = new RelayCommand(x =>
                     {
                         Report report = new Report(new PdfFormatter());
                         Page page = new Page(report);
@@ -30,14 +30,14 @@ namespace WpfApp1.ViewModels
                         Double rX = 20;
                         Double rY = 20;
                         int AllSum = 0;
-                        foreach (var item in getRep)
+                        foreach (var item in _getRep)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.Time)));
                             rY += 10;
                         }
                         rY = 20;
                         rX = rX + 60;
-                        foreach (var item in getRep)
+                        foreach (var item in _getRep)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString($"{item.Sum} $")));
                             AllSum += item.Sum;
@@ -45,7 +45,7 @@ namespace WpfApp1.ViewModels
                         }
                         rY = 20;
                         rX = rX + 60;
-                        foreach (var item in getRep)
+                        foreach (var item in _getRep)
                         {
                             page.AddMM(rX, rY, new RepString(fp, Convert.ToString(item.IdClientNavigation.Login)));
                             rY += 10;
