@@ -7,12 +7,27 @@
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         <Button
-            x:Name="GenerateButton"
+            x:Name="GenerateButtonPdf"
+            Grid.Row="0"
+            Grid.Column="0"
             Content="Сгенерировать PDF"
             FontFamily="Cousine"
             FontSize="14"
             Command="{Binding GeneratePDF}"
+            />
+        <Button
+            x:Name="GenerateButtonExcel"
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="Сгенерировать Excel"
+            FontFamily="Cousine"
+            FontSize="14"
+            Command="{Binding GenerateExcel}"
             />
     </Grid>
 </Window>
