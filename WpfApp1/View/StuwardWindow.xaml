@@ -25,7 +25,8 @@
             Margin="10 30 0 10"
             ItemsSource="{Binding CheckDish, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedDish}"
-            SelectionMode="Single">
+            SelectionMode="Single"
+            PreviewMouseDown = "ProductsList_OnPreviewMouseDown">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -66,8 +67,10 @@
             Grid.RowSpan="2"
             Margin="0 30 10 10"
             ItemsSource="{Binding FinishDishes, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedDish}"
-            SelectionMode="Single">
+            SelectedItem="{Binding SelectedDishF}"
+            SelectionMode="Single"
+            AllowDrop="True"
+            Drop="BagList_OnDrop">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>

@@ -7,6 +7,7 @@ namespace WpfApp1.ViewModels
 {
     public class StuwardViewModel : StaticViewModel
     {
+
         public StuwardViewModel()
         {
             CheckDish = new ObservableCollection<Dish>(Service.db.Dishes);
@@ -34,6 +35,7 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged();
             }
         }
+       
         private Dish _selectedDish = new Dish();
         public Dish SelectedDish
         {
@@ -41,6 +43,16 @@ namespace WpfApp1.ViewModels
             set
             {
                 _selectedDish = value;
+                OnPropertyChanged();
+            }
+        }
+        private Dish _selectedDishF = new Dish();
+        public Dish SelectedDishF
+        {
+            get => _selectedDishF;
+            set
+            {
+                _selectedDishF = value;
                 OnPropertyChanged();
             }
         }
@@ -71,7 +83,7 @@ namespace WpfApp1.ViewModels
 
                             Service.db.Orders.Add(order);
                             Service.db.SaveChanges();
-                            foreach (Dish? item in FinishDishes)
+                            foreach (Dish item in FinishDishes)
                             {
                                 DishesInOrder dishesInOrder = new DishesInOrder
                                 {
@@ -109,9 +121,9 @@ namespace WpfApp1.ViewModels
         public RelayCommand DeleteButtonCommand => _deleteButtonCommand ??
                     (_deleteButtonCommand = new RelayCommand(x =>
                     {
-                        if (SelectedDish != null && FinishDishes.Count != 0)
+                        if (SelectedDishF != null && FinishDishes.Count != 0)
                         {
-                            FinishDishes.Remove(FinishDishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
+                            FinishDishes.Remove(FinishDishes.FirstOrDefault(x => x.Title == SelectedDishF.Title));
                             
                         }
                         else if (FinishDishes.Count == 1)
