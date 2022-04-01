@@ -91,7 +91,8 @@ namespace WpfApp1.ViewModels
                     {
                         if (SelectedDish.Title != null)
                         {
-                            FinishDishes.Add(Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
+                            var tempDish = Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title);
+                            FinishDishes.Add(tempDish);
                         }
                         double temp = 0;
                         foreach (Dish item in FinishDishes)
@@ -111,6 +112,11 @@ namespace WpfApp1.ViewModels
                         if (SelectedDish != null && FinishDishes.Count != 0)
                         {
                             FinishDishes.Remove(FinishDishes.FirstOrDefault(x => x.Title == SelectedDish.Title));
+                            
+                        }
+                        else if (FinishDishes.Count == 1)
+                        {
+                            FinishDishes.Clear();
                         }
                         double temp = 0;
                         foreach (Dish item in FinishDishes)

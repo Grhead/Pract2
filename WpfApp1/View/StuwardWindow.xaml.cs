@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Threading;
 
 namespace WpfApp1
 {
-    public partial class StuwardWindow : Window
+    public partial class StuwardWindow : Window, INotifyPropertyChanged
     {
         public StuwardWindow()
         {
@@ -18,6 +20,12 @@ namespace WpfApp1
             timer.Start();
 
 
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string property = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         private void TimerTick(object sender, EventArgs e)

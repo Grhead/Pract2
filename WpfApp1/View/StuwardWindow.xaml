@@ -24,7 +24,8 @@
             Grid.RowSpan="2"
             Margin="10 30 0 10"
             ItemsSource="{Binding CheckDish, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedDish}">
+            SelectedItem="{Binding SelectedDish}"
+            SelectionMode="Single">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -65,7 +66,8 @@
             Grid.RowSpan="2"
             Margin="0 30 10 10"
             ItemsSource="{Binding FinishDishes, UpdateSourceTrigger=PropertyChanged}"
-            SelectedItem="{Binding SelectedDish}">
+            SelectedItem="{Binding SelectedDish}"
+            SelectionMode="Single">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
