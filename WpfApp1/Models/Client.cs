@@ -18,7 +18,7 @@ namespace WpfApp1
         public string Login { get; set; } = null!;
         public string Password { get; set; } = null!;
 
-        public virtual Role RoleNavigation { get; set; } = null!;
-        public virtual ICollection<Order> Orders { get; set; }
+        public Role RoleNavigation { get; set; } = null!;
+        public ICollection<Order> Orders { get; set; }
     }
 }

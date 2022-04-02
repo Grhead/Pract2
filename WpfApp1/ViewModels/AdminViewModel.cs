@@ -9,12 +9,14 @@ namespace WpfApp1.ViewModels
 {
     public class AdminViewModel : StaticViewModel
     {
-        private readonly ObservableCollection<Order> _infoFromDb = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
-        private readonly Random rand = new Random();
+        private ObservableCollection<Order> _infoFromDb = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
+        private Random rand = new Random();
         private RelayCommand _generatePdf;
         public RelayCommand GeneratePDF => _generatePdf ??
                     (_generatePdf = new RelayCommand(x =>
                     {
+                        _infoFromDb = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
+
                         Report report = new Report(new PdfFormatter());
                         Root.Reports.Page page = new Root.Reports.Page(report);
                         FontDef fd = new FontDef(report, "Helvetica");
@@ -51,6 +53,7 @@ namespace WpfApp1.ViewModels
         public RelayCommand GenerateExcel => _generateExcel ??
                     (_generateExcel = new RelayCommand(x =>
                     {
+                        _infoFromDb = new ObservableCollection<Order>(Service.db.Orders.Include(q => q.StatusNavigation).Where(x => x.StatusNavigation.Id == 4).Include(x => x.IdClientNavigation));
                         using (XLWorkbook workbook = new XLWorkbook())
                         {
                             string name = "Report" + rand.Next().ToString();
