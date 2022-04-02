@@ -57,7 +57,15 @@ namespace WpfApp1
             else
             {
                 stuwardViewModel.FinishDishes.Add(product);
-
+                double temp = 0;
+                foreach (Dish item in stuwardViewModel.FinishDishes)
+                {
+                    if (item != null)
+                    {
+                        temp += Convert.ToDouble(item.Price);
+                    }
+                }
+                stuwardViewModel.SumOfDishes = temp;
             }
             PreOrder.ItemsSource = stuwardViewModel.FinishDishes;
             PreOrder.Items.Refresh();
