@@ -13,7 +13,7 @@ namespace WpfApp1
     public partial class StuwardWindow : Window, INotifyPropertyChanged
     {
         public StuwardViewModel stuwardViewModel = new StuwardViewModel();
-        
+
         public StuwardWindow()
         {
             InitializeComponent();
@@ -52,12 +52,12 @@ namespace WpfApp1
             bool isExists = test.Exists(x => x == product);
             if (isExists)
             {
-                test.Find(x => x == product);
+                //test.Find(x => x == product);
             }
             else
             {
                 stuwardViewModel.FinishDishes.Add(product);
-                
+
             }
             PreOrder.ItemsSource = stuwardViewModel.FinishDishes;
             PreOrder.Items.Refresh();

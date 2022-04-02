@@ -8,11 +8,9 @@ namespace WpfApp1
         {
         }
 
-        public CooskRDBContext(DbContextOptions<CooskRDBContext> options)
-            : base(options)
+        public CooskRDBContext(DbContextOptions<CooskRDBContext> options) : base(options)
         {
         }
-
         public virtual DbSet<Client> Clients { get; set; } = null!;
         public virtual DbSet<Dish> Dishes { get; set; } = null!;
         public virtual DbSet<DishesInOrder> DishesInOrders { get; set; } = null!;
@@ -128,7 +126,6 @@ namespace WpfApp1
 
             OnModelCreatingPartial(modelBuilder);
         }
-
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

@@ -9,8 +9,5 @@
             get => clientSession;
             set => clientSession = value;
         }
-
     }
-
-
 }

@@ -35,7 +35,7 @@ namespace WpfApp1.ViewModels
                 OnPropertyChanged();
             }
         }
-       
+
         private Dish _selectedDish = new Dish();
         public Dish SelectedDish
         {
@@ -103,7 +103,7 @@ namespace WpfApp1.ViewModels
                     {
                         if (SelectedDish.Title != null)
                         {
-                            var tempDish = Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title);
+                            Dish? tempDish = Service.db.Dishes.FirstOrDefault(x => x.Title == SelectedDish.Title);
                             FinishDishes.Add(tempDish);
                         }
                         double temp = 0;
@@ -124,7 +124,7 @@ namespace WpfApp1.ViewModels
                         if (SelectedDishF != null && FinishDishes.Count != 0)
                         {
                             FinishDishes.Remove(FinishDishes.FirstOrDefault(x => x.Title == SelectedDishF.Title));
-                            
+
                         }
                         else if (FinishDishes.Count == 1)
                         {
